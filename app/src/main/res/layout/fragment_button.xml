@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ButtonFragment">
+
+    <Button
+        android:id="@+id/lesson_part_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#4DC615"
+        android:text="@string/next_section_button_text"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp" />
+</LinearLayout>
