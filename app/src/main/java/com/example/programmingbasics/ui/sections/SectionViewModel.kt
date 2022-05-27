@@ -1,4 +1,4 @@
-package com.example.programmingbasics.view_models
+package com.example.programmingbasics.ui.sections
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

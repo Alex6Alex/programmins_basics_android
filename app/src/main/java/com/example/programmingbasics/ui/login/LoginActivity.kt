@@ -1,8 +1,8 @@
 package com.example.programmingbasics.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -12,26 +12,24 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.programmingbasics.databinding.ActivityLoginBinding
-
 import com.example.programmingbasics.R
+import com.example.programmingbasics.ui.sections.SectionsActivity
 
 class LoginActivity : AppCompatActivity() {
-  private lateinit var loginViewModel: LoginViewModel
-  private lateinit var binding: ActivityLoginBinding
+  private val loginViewModel: LoginViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    binding = ActivityLoginBinding.inflate(layoutInflater)
+    val binding = ActivityLoginBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
     val username = binding.username
     val password = binding.password
     val login = binding.login
     val loading = binding.loading
-
-    loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
     loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
       val loginState = it ?: return@Observer
@@ -47,12 +45,13 @@ class LoginActivity : AppCompatActivity() {
 
       loading.visibility = View.GONE
       if (loginResult.error != null) showLoginFailed(loginResult.error)
-      if (loginResult.success != null) updateUiWithUser(loginResult.success)
 
-      setResult(Activity.RESULT_OK)
+      if (loginResult.success != null) {
+        updateUiWithUser(loginResult.success)
 
-      //Complete and destroy login activity once successful
-      finish()
+        setResult(Activity.RESULT_OK)
+        finish()
+      }
     })
 
     username.afterTextChanged {
@@ -82,12 +81,9 @@ class LoginActivity : AppCompatActivity() {
   private fun updateUiWithUser(model: LoggedInUserView) {
     val welcome = getString(R.string.welcome)
     val displayName = model.displayName
-    // TODO : initiate successful logged in experience
-    Toast.makeText(
-      applicationContext,
-      "$welcome $displayName",
-      Toast.LENGTH_LONG
-    ).show()
+
+    startActivity(Intent(this, SectionsActivity::class.java))
+    Toast.makeText(applicationContext, "$welcome $displayName", Toast.LENGTH_LONG).show()
   }
 
   private fun showLoginFailed(@StringRes errorString: Int) {

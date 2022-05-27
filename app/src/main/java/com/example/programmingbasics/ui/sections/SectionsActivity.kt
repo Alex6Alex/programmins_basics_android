@@ -1,4 +1,4 @@
-package com.example.programmingbasics
+package com.example.programmingbasics.ui.sections
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,22 +9,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.programmingbasics.R
 import com.example.programmingbasics.api.data_objects.Section
-import com.example.programmingbasics.view_models.SectionViewModel
+import com.example.programmingbasics.ui.lesson.LessonActivity
 
-class MainActivity : AppCompatActivity() {
-//  private val learnThemeViewModel: LearnThemeViewModel by viewModels {
-//    LearnThemeViewModelFactory((application as ProgrammingBasicsApplication).repository)
-//  }
+class SectionsActivity : AppCompatActivity() {
   private val sectionViewModel: SectionViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    setContentView(R.layout.activity_sections)
 
     val rootLayout = findViewById<LinearLayout>(R.id.constraint_layout)
-
-//    sectionViewModel.statusMessage.observe(this) { s -> rootLayout.findViewById<TextView>(R.id.textView2).text = s }
 
     sectionViewModel.records.observe(this) { records ->
       for (section in records.sortedBy { record -> record.order }) {
@@ -48,7 +44,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun addSectionToView(section: Section, viewGroup: ViewGroup) {
-    val view = layoutInflater.inflate(R.layout.theme_header, viewGroup, false)
+    val view = layoutInflater.inflate(R.layout.section, viewGroup, false)
 
     view.findViewById<TextView>(R.id.number).text = section.order.toString()
     view.findViewById<TextView>(R.id.name).text = section.name
@@ -57,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     viewGroup.addView(view)
 
     section.lessons.sortedBy { lesson -> lesson.order }.forEach { lesson ->
-      val lessonView = layoutInflater.inflate(R.layout.theme_content, viewGroup, false)
+      val lessonView = layoutInflater.inflate(R.layout.lesson, viewGroup, false)
       lessonView.id = lesson.id.toInt()
 
       lessonView.findViewById<TextView>(R.id.name).text =

@@ -1,4 +1,4 @@
-package com.example.programmingbasics
+package com.example.programmingbasics.ui.lesson
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

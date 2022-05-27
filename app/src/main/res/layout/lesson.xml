@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/themeHeader"
+    android:id="@+id/lesson"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#E4E4E4"
-    android:padding="15dp">
+    android:background="@drawable/lesson_item"
+    android:focusable="true"
+    android:onClick="openSubject"
+    android:paddingHorizontal="40dp"
+    android:paddingVertical="15dp">
 
     <TableRow
         android:layout_width="wrap_content"
@@ -12,24 +15,10 @@
         android:layout_marginBottom="5dp">
 
         <TextView
-            android:id="@+id/number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="24sp" />
-
-        <Space
-            android:layout_width="15dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text=""
-            android:textSize="16sp" />
-
+            android:text="" />
     </TableRow>
 
     <TableRow
@@ -41,7 +30,6 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
             android:text="" />
     </TableRow>
 

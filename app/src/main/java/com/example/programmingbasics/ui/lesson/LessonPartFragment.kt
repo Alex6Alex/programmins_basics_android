@@ -1,4 +1,4 @@
-package com.example.programmingbasics
+package com.example.programmingbasics.ui.lesson
 
 import android.os.Bundle
 import android.text.Html
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.setFragmentResult
+import com.example.programmingbasics.R
 
 open class LessonPartFragment(private val btnFragment: Fragment) : Fragment() {
   override fun onCreateView(

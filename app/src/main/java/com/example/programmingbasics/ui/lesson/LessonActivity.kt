@@ -1,10 +1,11 @@
-package com.example.programmingbasics
+package com.example.programmingbasics.ui.lesson
 
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.programmingbasics.view_models.LessonViewModel
+import com.example.programmingbasics.R
+import com.example.programmingbasics.viewModelsFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class LessonActivity : AppCompatActivity() {
