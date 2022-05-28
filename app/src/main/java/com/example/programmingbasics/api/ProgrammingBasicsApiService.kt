@@ -15,7 +15,7 @@ private val retrofit = Retrofit.Builder()
   .build()
 
 object ProgrammingBasicsApi {
-  val retrofitService: ProgrammingBasicsApiService by lazy {
+  val client: ProgrammingBasicsApiService by lazy {
     retrofit.create(ProgrammingBasicsApiService::class.java)
   }
 }

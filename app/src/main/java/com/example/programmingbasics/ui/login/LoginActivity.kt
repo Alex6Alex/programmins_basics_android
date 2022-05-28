@@ -1,6 +1,7 @@
 package com.example.programmingbasics.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
 import android.os.Bundle
@@ -47,7 +48,11 @@ class LoginActivity : AppCompatActivity() {
       if (loginResult.error != null) showLoginFailed(loginResult.error)
 
       if (loginResult.success != null) {
-        updateUiWithUser(loginResult.success)
+        startActivity(Intent(this, SectionsActivity::class.java))
+        val preferencesEditor = getSharedPreferences("Auth", Context.MODE_PRIVATE).edit()
+
+        preferencesEditor.putString("token", loginResult.success.token)
+        preferencesEditor.apply()
 
         setResult(Activity.RESULT_OK)
         finish()
@@ -76,14 +81,6 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.login(username.text.toString(), password.text.toString())
       }
     }
-  }
-
-  private fun updateUiWithUser(model: LoggedInUserView) {
-    val welcome = getString(R.string.welcome)
-    val displayName = model.displayName
-
-    startActivity(Intent(this, SectionsActivity::class.java))
-    Toast.makeText(applicationContext, "$welcome $displayName", Toast.LENGTH_LONG).show()
   }
 
   private fun showLoginFailed(@StringRes errorString: Int) {

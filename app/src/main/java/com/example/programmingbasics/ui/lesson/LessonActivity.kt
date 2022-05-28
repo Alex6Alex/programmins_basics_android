@@ -1,5 +1,6 @@
 package com.example.programmingbasics.ui.lesson
 
+import android.content.Context
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +10,9 @@ import com.example.programmingbasics.viewModelsFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class LessonActivity : AppCompatActivity() {
-  private val lessonViewModel: LessonViewModel by viewModelsFactory {
-    LessonViewModel(intent.getIntExtra(EXTRA_MESSAGE, 0))
+  private val lessonViewModel by viewModelsFactory {
+    val token = getSharedPreferences("Auth", Context.MODE_PRIVATE).getString("token", null)
+    LessonViewModel(intent.getIntExtra(EXTRA_MESSAGE, 0), token)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,6 @@
 package com.example.programmingbasics.ui.sections
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
@@ -7,14 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.programmingbasics.R
 import com.example.programmingbasics.api.data_objects.Section
 import com.example.programmingbasics.ui.lesson.LessonActivity
+import com.example.programmingbasics.viewModelsFactory
 
 class SectionsActivity : AppCompatActivity() {
-  private val sectionViewModel: SectionViewModel by viewModels()
+  private val sectionViewModel by viewModelsFactory {
+    val token = getSharedPreferences("Auth", Context.MODE_PRIVATE).getString("token", null)
+    SectionViewModel(token)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

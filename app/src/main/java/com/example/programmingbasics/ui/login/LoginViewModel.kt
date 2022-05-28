@@ -23,12 +23,15 @@ class LoginViewModel : ViewModel() {
   fun login(email: String, password: String) {
     val singInData = LoginRequest(User(email = email, password = password))
 
-    ProgrammingBasicsApi.retrofitService.signIn(singInData).enqueue(object : Callback<UserResponse> {
+    ProgrammingBasicsApi.client.signIn(singInData).enqueue(object : Callback<UserResponse> {
       override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-        if (response.isSuccessful)
-          _loginResult.value = LoginResult(success = LoggedInUserView(displayName = "1"))
-        else
+        if (response.isSuccessful) {
+          val user = response.body()!!.data
+
+          _loginResult.value = LoginResult(success = LoggedInUserView(displayName = user.email, token = user.token!!))
+        } else {
           _loginResult.value = LoginResult(error = R.string.login_failed)
+        }
       }
 
       override fun onFailure(call: Call<UserResponse>, t: Throwable) {
