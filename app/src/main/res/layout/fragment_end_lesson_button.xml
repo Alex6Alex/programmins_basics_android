@@ -15,10 +15,12 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFFFFF"
+        android:insetTop="1dp"
+        android:stateListAnimator="@null"
         android:text="@string/end_lesson_button_text"
         android:textAllCaps="false"
+        android:textColor="#4DC615"
         app:cornerRadius="10dp"
         app:strokeColor="#4DC615"
-        android:textColor="#4DC615"
         app:strokeWidth="1dp" />
 </LinearLayout>

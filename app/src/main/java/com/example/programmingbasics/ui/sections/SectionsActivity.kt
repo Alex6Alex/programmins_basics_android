@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.example.programmingbasics.R
 import com.example.programmingbasics.api.data_objects.Section
 import com.example.programmingbasics.ui.lesson.LessonActivity
+import com.example.programmingbasics.ui.login.LoginActivity
 import com.example.programmingbasics.viewModelsFactory
 
 class SectionsActivity : AppCompatActivity() {
@@ -31,6 +35,23 @@ class SectionsActivity : AppCompatActivity() {
         addSectionToView(section, rootLayout)
       }
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.custom_menu, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+    R.id.log_out -> {
+      getSharedPreferences("Auth", Context.MODE_PRIVATE).edit { putString("token", null) }
+      startActivity(Intent(this@SectionsActivity, LoginActivity::class.java))
+      finish()
+
+      true
+    }
+
+    else -> super.onOptionsItemSelected(item)
   }
 
   fun startLearning(view: View) {

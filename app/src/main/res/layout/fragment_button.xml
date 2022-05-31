@@ -15,6 +15,8 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#4DC615"
+        android:insetTop="1dp"
+        android:stateListAnimator="@null"
         android:text="@string/next_section_button_text"
         android:textAllCaps="false"
         app:cornerRadius="10dp" />
