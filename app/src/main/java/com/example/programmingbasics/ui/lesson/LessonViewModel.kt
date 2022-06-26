@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.programmingbasics.api.ProgrammingBasicsApi
 import com.example.programmingbasics.api.data_objects.Lesson
+import com.example.programmingbasics.api.data_objects.LessonUnit
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -26,6 +27,17 @@ class LessonViewModel(private val lessonId: Int, private val token: String?) : V
         val response = ProgrammingBasicsApi.client.getLesson(lessonId, "Bearer $token")
         _statusMsg.value = "Success: lesson were loaded"
         _record.value = response.data
+      } catch (e: Exception) {
+        _statusMsg.value = "Failure: ${e.message}"
+      }
+    }
+  }
+
+  fun markUnitAsRead(lessonUnit: LessonUnit) {
+    viewModelScope.launch {
+      try {
+        val response = ProgrammingBasicsApi.client.passLessonUnit(lessonUnit.id, "Bearer $token")
+        _statusMsg.value = "Success: lesson unit was passed"
       } catch (e: Exception) {
         _statusMsg.value = "Failure: ${e.message}"
       }

@@ -17,4 +17,7 @@ interface ProgrammingBasicsApiService {
 
   @GET(Constants.LESSON_URL)
   suspend fun getLesson(@Path("id") lessonId: Int, @Header("Authorization") token: String): LessonResponse
+
+  @POST(Constants.PASS_LESSON_UNIT_URL)
+  suspend fun passLessonUnit(@Path("id") lessonUnitId: Long, @Header("Authorization") token: String)
 }
