@@ -1,7 +1,7 @@
 package com.example.programmingbasics.api
 
 object Constants {
-  const val BASE_URL = "http://192.168.0.105/api/v1/"
+  const val BASE_URL = "https://programming-basics.herokuapp.com/api/v1/"
   const val SECTIONS_URL = "sections"
   const val LESSON_URL = "lessons/{id}"
   const val SIGN_IN_URL = "users/sign_in"
